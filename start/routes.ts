@@ -6,6 +6,9 @@ import categoriesApiRoutes from './routes/v1/categoriesApi.js'
 import menuItemsApiRoutes from './routes/v1/menuItemsApi.js'
 
 import publicMenusApiRoutes from './routes/v1/public/publicMenusApi.js'
+import { dd } from '@adonisjs/core/services/dumper'
+import Category from '#models/category'
+import Menu from '#models/menu'
 
 router.group(() => {
 
@@ -21,6 +24,8 @@ router.group(() => {
 
 }).prefix('user/v1')
 publicMenusApiRoutes(router)
+
+
 
 
 

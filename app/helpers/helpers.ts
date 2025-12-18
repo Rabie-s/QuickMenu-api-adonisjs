@@ -1,14 +1,22 @@
 import { cuid } from '@adonisjs/core/helpers'
+import { MultipartFile } from '@adonisjs/core/types/bodyparser'
 import drive from '@adonisjs/drive/services/main'
 
-export async function upload(file: any): Promise<string> {
+export async function upload(file: MultipartFile,folder:string): Promise<string> {
     if (!file) {
         throw new Error("No file provided")
     }
-    const fileName = `${cuid()}.${file.extname}`
+
+    let fileName = ''
+
+    if(folder===null){
+        fileName = `uploads/${cuid()}.${file.extname}`
+    }else{
+        fileName = `uploads/${folder}/${cuid()}.${file.extname}`
+    }
+
 
     try {
-        
         await file.moveToDisk(fileName)
         return fileName
     } catch (error) {
@@ -17,7 +25,7 @@ export async function upload(file: any): Promise<string> {
     }
 }
 
-export async function deleteFile(filePath:any){
+export async function deleteFile(filePath: string) {
     const result = await drive.use().delete(filePath)
-    
+
 }

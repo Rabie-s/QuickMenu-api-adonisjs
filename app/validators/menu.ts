@@ -10,8 +10,8 @@ export const createMenuValidator = vine.compile(
 
 export const updateMenuValidator = vine.compile(
     vine.object({
-        name: vine.string().trim(),
+        name: vine.string().trim().optional(),
         cover_image: vine.file({extnames:['jpg', 'png','jpeg']}).optional(),
-        is_available: vine.boolean()
+        is_available: vine.boolean().optional()
     })
 )

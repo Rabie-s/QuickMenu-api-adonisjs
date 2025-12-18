@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
 import Category from '#models/category'
-import { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class MenuItem extends BaseModel {
   @column({ isPrimary: true })
@@ -32,5 +32,5 @@ export default class MenuItem extends BaseModel {
   declare updatedAt: DateTime
 
   @belongsTo(() => Category)
-  declare category: typeof Category
+  declare category: BelongsTo <typeof Category>
 }

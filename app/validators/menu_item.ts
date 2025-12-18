@@ -11,10 +11,10 @@ export const createMenuItemValidator = vine.compile(
 
 export const updateMenuItemValidator = vine.compile(
     vine.object({
-        name: vine.string().trim(),
-        price:vine.number(),
-        description:vine.string().trim(),
-        image:vine.file().optional(),
-        is_available:vine.boolean(),
+        name: vine.string().trim().optional(),
+        price:vine.number().optional(),
+        description:vine.string().trim().optional(),
+        image:vine.file().optional().optional(),
+        is_available:vine.boolean().optional(),
     })
 )
