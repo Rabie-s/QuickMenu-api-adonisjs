@@ -24,11 +24,7 @@ export default class MenuService {
         // 3️⃣ Check limit (null = unlimited)
         if (menuLimit !== null && total >= menuLimit) {
             throw new MenuLimitException(menuLimit)
-        }    // 3️⃣ Check limit (null = unlimited)
-        if (menuLimit !== null && total >= menuLimit) {
-            throw new MenuLimitException(menuLimit)
         }
-
 
         if (imageFile) {
             const imageName = await upload(imageFile, 'menus')
