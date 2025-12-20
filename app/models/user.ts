@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import type { HasMany,HasOne } from '@adonisjs/lucid/types/relations'
-import { afterSave, BaseModel, beforeCreate, column, hasMany,hasOne } from '@adonisjs/lucid/orm'
+import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import { afterSave, BaseModel, beforeCreate, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import Menu from '#models/menu'
@@ -40,8 +40,8 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @hasMany(() => Menu)
   declare menus: HasMany<typeof Menu>
 
- @hasOne(() => UserSubscription)
-declare UserSubscription: HasOne<typeof UserSubscription>
+  @hasOne(() => UserSubscription)
+  declare UserSubscription: HasOne<typeof UserSubscription>
 
   @afterSave()
   static async registerPlan(user: User) {

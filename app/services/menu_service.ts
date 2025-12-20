@@ -1,4 +1,5 @@
 import { upload, deleteFile } from '../helpers/helpers.js'
+import MenuLimitException from '#exceptions/menu_limit_exception'
 
 export default class MenuService {
 
@@ -7,6 +8,28 @@ export default class MenuService {
     }
 
     static async createMenu(user: any, data: any, imageFile: any) {
+
+        const userSubscription = await user
+            .related('UserSubscription')
+            .query()
+            .preload('subscription')
+            .firstOrFail()
+
+        const menuLimit = userSubscription.subscription.menuLimit
+
+        // 2️⃣ Count user menus
+        const count = await user.related('menus').query().count('* as total')
+        const total = Number(count[0].$extras.total)
+
+        // 3️⃣ Check limit (null = unlimited)
+        if (menuLimit !== null && total >= menuLimit) {
+            throw new MenuLimitException(menuLimit)
+        }    // 3️⃣ Check limit (null = unlimited)
+        if (menuLimit !== null && total >= menuLimit) {
+            throw new MenuLimitException(menuLimit)
+        }
+
+
         if (imageFile) {
             const imageName = await upload(imageFile, 'menus')
             data.cover_image = imageName
