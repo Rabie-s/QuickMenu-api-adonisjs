@@ -11,7 +11,6 @@ export default class extends BaseSchema {
         .integer('user_id')
         .unsigned()
         .references('users.id')
-        .unique()
         .onDelete('CASCADE')
 
       table
@@ -22,6 +21,8 @@ export default class extends BaseSchema {
 
       table.timestamp('starts_at', { useTz: true }).notNullable()
       table.timestamp('ends_at', { useTz: true }).nullable()
+
+      table.string('status').notNullable().defaultTo('active')
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

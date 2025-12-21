@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column,belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import User from '#models/user'
 import Subscription from '#models/subscription'
+import  {SubscriptionStatus}  from '../enums/subscription_status.js'
 
 export default class UserSubscription extends BaseModel {
   @column({ isPrimary: true })
@@ -25,6 +26,9 @@ export default class UserSubscription extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @column()
+  declare status: SubscriptionStatus
 
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
