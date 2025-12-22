@@ -3,7 +3,7 @@ import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import User from '#models/user'
 import Subscription from '#models/subscription'
-import  {SubscriptionStatus}  from '../enums/subscription_status.js'
+import {SubscriptionStatus} from '#enums/subscription_status'
 
 export default class UserSubscription extends BaseModel {
   @column({ isPrimary: true })
